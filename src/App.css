@@ -247,11 +247,22 @@ input[type=number] {
 }
 
 .clear-button {
-  background-color: pink;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #FF69B4;
+  color: white;
   border: none;
-  padding: 5px 10px;
+  border-radius: 25px;
   cursor: pointer;
-  margin-left: 10px;
+  transition: all 0.3s ease;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  margin: 5px;
+}
+
+.clear-button:hover {
+  transform: scale(1.05);
+  background-color: #FF1493;
 }
 
 .score.top-right {
@@ -278,4 +289,29 @@ input[type=number] {
   color: #FF69B4;
   text-align: center;
   margin-top: 20px;
+}
+
+.score-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.score-buttons button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #FF69B4;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.score-buttons button:hover {
+  transform: scale(1.05);
+  background-color: #FF1493;
 }

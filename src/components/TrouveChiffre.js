@@ -33,6 +33,12 @@ function TrouveChiffre() {
   return (
     <section className="trouve-chiffre-section">
       <h2>Trouve le chiffre manquant 🔍</h2>
+      <ScoreCalculator 
+        answers={answers} 
+        correctAnswers={correctAnswers} 
+        localStorageKey="trouveChiffreAnswers"
+        setAnswers={setAnswers}
+      />
       {exercices.map((exercice, index) => (
         <div key={index} className="exercise-row">
           <span>{exercice.num1}</span>

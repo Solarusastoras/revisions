@@ -32,16 +32,21 @@ function ScoreCalculator({ answers, correctAnswers, localStorageKey, setAnswers 
     event.preventDefault();
     setScore(null);
     setAverage(null);
-    setAnswers({});  // Vider les réponses
+    if (setAnswers) {
+      setAnswers({});  // Vider les réponses
+    }
     localStorage.removeItem(localStorageKey);
   };
 
   return (
-    <div>
-      {score !== null && <div className="score top-right" style={{ fontSize: '3rem' }}>Score: {score}/20</div>}
-      {average !== null && <div className="average top-right" style={{ fontSize: '3rem' }}>Moyenne: {average}/20</div>}
-      <button className="clear-button" onClick={calculateScore}>Calculer le score</button>
-      <button className="clear-button" onClick={clearResults}>Effacer tous les résultats</button>
+    <div> 
+
+      <div className="score-buttons">
+        <button className="clear-button" onClick={calculateScore}>Calculer le score</button>
+        <button className="clear-button" onClick={clearResults}>Effacer tous les résultats</button>
+        <div>Note : {score}/20</div>
+        {average !== null && <div className="average top-right" style={{ fontSize: '3rem' }}>Moyenne: {average}/20</div>}
+      </div>
     </div>
   );
 }

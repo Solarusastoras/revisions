@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ScoreCalculator from './ScoreCalculator';
 
 function ArbreCalcul() {
   const [answers, setAnswers] = useState(() => {
@@ -35,6 +36,8 @@ function ArbreCalcul() {
     localStorage.setItem('answers', JSON.stringify(answers));
   }, [answers]);
 
+  const correctAnswers = arbres.map(arbre => arbre.ligne3.resultat);
+
   const calculateScore = () => {
     let correctAnswers = 0;
     arbres.forEach((arbre, index) => {
@@ -70,12 +73,12 @@ function ArbreCalcul() {
   return (
     <section className="arbre-section">
       <h2>Arbre à calcul 🌳</h2>
-      <div className="exercise-buttons">
-        <button className="clear-button" onClick={calculateScore}>Calculer le score</button>
-        <button className="clear-button" onClick={clearResults}>Effacer tous les résultats</button>
-      </div>
-      {score !== null && <div className="score top-right" style={{ fontSize: '3rem' }}>Score: {score}/20</div>}
-      {average !== null && <div className="average top-right" style={{ fontSize: '3rem' }}>Moyenne: {average}/20</div>}
+      <ScoreCalculator 
+        answers={answers} 
+        correctAnswers={correctAnswers} 
+        localStorageKey="arbreCalculAnswers"
+        setAnswers={setAnswers}
+      />
       {arbres.map((arbre, index) => (
         <div key={index} className="arbre-container">
           {/* Première ligne - nombres de base */}

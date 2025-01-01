@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveScore } from '../store/scoresSlice';
 import ScoreCalculator from './ScoreCalculator';
 
-function Double({ score, setScore }) {  // Ajouter les props ici
-  const [answers, setAnswers] = useState(() => {
-    const savedAnswers = localStorage.getItem('doubleAnswers');
-    return savedAnswers ? JSON.parse(savedAnswers) : {};
-  });
-  
+function Double() {
+  const dispatch = useDispatch();
+  const answers = useSelector(state => state.scores.doubleAnswers) || {};
+
   const doubles = [
     { number: 1 },
     { number: 2 },
@@ -22,22 +22,31 @@ function Double({ score, setScore }) {  // Ajouter les props ici
 
   const correctAnswers = doubles.map(item => item.number * 2);
 
+  const handleAnswerChange = (index, value) => {
+    dispatch(saveScore({
+      exercise: 'double',
+      answers: {
+        ...answers,
+        [`answer_${index}`]: value
+      }
+    }));
+  };
+
   const clearExerciseResult = (index) => {
     const newAnswers = { ...answers };
     delete newAnswers[`answer_${index}`];
-    setAnswers(newAnswers);
+    dispatch(saveScore({
+      exercise: 'double',
+      answers: newAnswers
+    }));
   };
 
   return (
     <section className="doubles-section">
       <h2>Le Double 🎯</h2>
       <ScoreCalculator 
-        answers={answers} 
         correctAnswers={correctAnswers} 
-        localStorageKey="doubleAnswers"
-        score={score}
-        setScore={setScore}
-        setAnswers={setAnswers}  // Ajouter cette ligne
+        exerciseKey="double"
       />
       {doubles.map((item, index) => (
         <div key={index} className="exercise-row">
@@ -47,12 +56,7 @@ function Double({ score, setScore }) {  // Ajouter les props ici
             type="number"
             placeholder="?"
             value={answers[`answer_${index}`] || ''}
-            onChange={(e) => {
-              setAnswers({
-                ...answers,
-                [`answer_${index}`]: e.target.value
-              });
-            }}
+            onChange={(e) => handleAnswerChange(index, e.target.value)}
           />
           {answers[`answer_${index}`] && (
             <span className="feedback">
