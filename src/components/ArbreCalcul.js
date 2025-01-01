@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function ArbreCalcul() {
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState(() => {
+    const savedAnswers = localStorage.getItem('answers');
+    return savedAnswers ? JSON.parse(savedAnswers) : {};
+  });
+  const [score, setScore] = useState(null);
+  const [average, setAverage] = useState(null);
   
   const arbres = [
     {
@@ -26,9 +31,51 @@ function ArbreCalcul() {
     }
   ];
 
+  useEffect(() => {
+    localStorage.setItem('answers', JSON.stringify(answers));
+  }, [answers]);
+
+  const calculateScore = () => {
+    let correctAnswers = 0;
+    arbres.forEach((arbre, index) => {
+      if (Number(answers[`resultat1_${index}`]) === arbre.ligne2.resultat1 &&
+          Number(answers[`resultat2_${index}`]) === arbre.ligne2.resultat2 &&
+          Number(answers[`final_${index}`]) === arbre.ligne3.resultat) {
+        correctAnswers += 1;
+      }
+    });
+    setScore((correctAnswers / arbres.length) * 20);
+  };
+
+  const calculateAverage = () => {
+    const totalScore = arbres.length * 20;
+    setAverage((score / totalScore) * 20);
+  };
+
+  const clearResults = () => {
+    setAnswers({});
+    setScore(null);
+    setAverage(null);
+    localStorage.removeItem('answers');
+  };
+
+  const clearExerciseResult = (index) => {
+    const newAnswers = { ...answers };
+    delete newAnswers[`resultat1_${index}`];
+    delete newAnswers[`resultat2_${index}`];
+    delete newAnswers[`final_${index}`];
+    setAnswers(newAnswers);
+  };
+
   return (
     <section className="arbre-section">
       <h2>Arbre à calcul 🌳</h2>
+      <div className="exercise-buttons">
+        <button className="clear-button" onClick={calculateScore}>Calculer le score</button>
+        <button className="clear-button" onClick={clearResults}>Effacer tous les résultats</button>
+      </div>
+      {score !== null && <div className="score top-right" style={{ fontSize: '3rem' }}>Score: {score}/20</div>}
+      {average !== null && <div className="average top-right" style={{ fontSize: '3rem' }}>Moyenne: {average}/20</div>}
       {arbres.map((arbre, index) => (
         <div key={index} className="arbre-container">
           {/* Première ligne - nombres de base */}
@@ -103,10 +150,11 @@ function ArbreCalcul() {
               </span>
             </div>
           )}
+          <button className="clear-button" onClick={() => clearExerciseResult(index)}>Effacer</button>
         </div>
       ))}
     </section>
   );
 }
 
-export default ArbreCalcul; 
+export default ArbreCalcul;

@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ScoreCalculator from './ScoreCalculator';
 
 function Calculs() {
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState(() => {
+    const savedAnswers = localStorage.getItem('calculsAnswers');
+    return savedAnswers ? JSON.parse(savedAnswers) : {};
+  });
   
   const calculs = [
     { num1: 4, num2: 2, num3: 3, total: 9 },
@@ -11,9 +15,20 @@ function Calculs() {
     { num1: 9, num2: 9, num3: 2, total: 20 }
   ];
 
+  const correctAnswers = calculs.map(item => item.num1 + item.num2 + item.num3);
+
+  const clearExerciseResult = (index) => {
+    const newAnswers = { ...answers };
+    delete newAnswers[`answer_${index}`];
+    setAnswers(newAnswers);
+  };
+
   return (
     <section className="calculs-section">
       <h2>Complete 🧮</h2>
+      <div className="exercise-buttons">
+        <ScoreCalculator answers={answers} correctAnswers={correctAnswers} localStorageKey="calculsAnswers" />
+      </div>
       {calculs.map((item, index) => (
         <div key={index} className="exercise-row">
           <span>{item.num1}</span>
@@ -26,25 +41,26 @@ function Calculs() {
             type="number"
             className="number-input"
             placeholder="?"
-            value={answers[`calcul_${index}`] || ''}
+            value={answers[`answer_${index}`] || ''}
             onChange={(e) => {
               setAnswers({
                 ...answers,
-                [`calcul_${index}`]: e.target.value
+                [`answer_${index}`]: e.target.value
               });
             }}
           />
-          {answers[`calcul_${index}`] && (
+          {answers[`answer_${index}`] && (
             <span className="feedback">
-              {Number(answers[`calcul_${index}`]) === (item.num1 + item.num2 + item.num3)
+              {Number(answers[`answer_${index}`]) === (item.num1 + item.num2 + item.num3)
                 ? '✅ Bravo Nono ! Tu as trouvé le bon résultat ! 🌟' 
                 : '❌ Essaie encore Nono ! Tu peux y arriver ! 💪'}
             </span>
           )}
+          <button className="clear-button" onClick={() => clearExerciseResult(index)}>Effacer</button>
         </div>
       ))}
     </section>
   );
 }
 
-export default Calculs; 
+export default Calculs;

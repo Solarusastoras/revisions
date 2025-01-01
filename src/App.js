@@ -6,12 +6,17 @@ import Ecris from './components/Ecris';
 import Calculs from './components/Calculs';
 import ArbreCalcul from './components/ArbreCalcul';
 import TrouveChiffre from './components/TrouveChiffre';
+import Resultat from './components/Resultat';
+import ScoreCalculator from './components/ScoreCalculator';
 
 function App() {
   const [currentExercise, setCurrentExercise] = useState('double');
+  const [score, setScore] = useState(null);
 
   const renderExercise = () => {
     switch(currentExercise) {
+      case 'resultat':
+        return <Resultat />;
       case 'double':
         return <Double />;
       case 'moitie':
@@ -34,6 +39,13 @@ function App() {
       <h1>Les Maths avec Nono 🌟</h1>
       
       <div className="exercise-buttons">
+      <button 
+          className={currentExercise === 'resultat' ? 'active' : ''} 
+          onClick={() => setCurrentExercise('resultat')}
+        >
+         Moyenne 
+        </button>
+
         <button 
           className={currentExercise === 'double' ? 'active' : ''} 
           onClick={() => setCurrentExercise('double')}
@@ -72,6 +84,7 @@ function App() {
         </button>
       </div>
 
+      <ScoreCalculator score={score} setScore={setScore} />
       {renderExercise()}
     </div>
   );

@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ScoreCalculator from './ScoreCalculator';
 
-function TrouveChiffre() {
-  const [answers, setAnswers] = useState({});
+function TrouveChiffre() {  
+  const [answers, setAnswers] = useState(() => {
+    const savedAnswers = localStorage.getItem('trouveChiffreAnswers');
+    return savedAnswers ? JSON.parse(savedAnswers) : {};
+  });
   
   const exercices = [
     { num1: 13, result: 18 },
@@ -18,9 +22,20 @@ function TrouveChiffre() {
     { num1: 9, result: 13 }
   ];
 
+  const correctAnswers = exercices.map(exercice => exercice.result - exercice.num1);
+
+  const clearExerciseResult = (index) => {
+    const newAnswers = { ...answers };
+    delete newAnswers[`answer_${index}`];
+    setAnswers(newAnswers);
+  };
+
   return (
     <section className="trouve-chiffre-section">
       <h2>Trouve le chiffre manquant 🔍</h2>
+      <div className="exercise-buttons">
+        <ScoreCalculator answers={answers} correctAnswers={correctAnswers} localStorageKey="trouveChiffreAnswers" />
+      </div>
       {exercices.map((exercice, index) => (
         <div key={index} className="exercise-row">
           <span>{exercice.num1}</span>
@@ -29,27 +44,28 @@ function TrouveChiffre() {
             type="number"
             className="number-input"
             placeholder="?"
-            value={answers[`trouve_${index}`] || ''}
+            value={answers[`answer_${index}`] || ''}
             onChange={(e) => {
               setAnswers({
                 ...answers,
-                [`trouve_${index}`]: e.target.value
+                [`answer_${index}`]: e.target.value
               });
             }}
           />
           <span>=</span>
           <span>{exercice.result}</span>
-          {answers[`trouve_${index}`] && (
+          {answers[`answer_${index}`] && (
             <span className="feedback">
-              {Number(answers[`trouve_${index}`]) === (exercice.result - exercice.num1)
+              {Number(answers[`answer_${index}`]) === (exercice.result - exercice.num1)
                 ? '✅ Bravo Nono ! Tu as trouvé le bon chiffre ! 🌟' 
                 : '❌ Essaie encore Nono ! Tu peux y arriver ! 💪'}
             </span>
           )}
+          <button className="clear-button" onClick={() => clearExerciseResult(index)}>Effacer</button>
         </div>
       ))}
     </section>
   );
 }
 
-export default TrouveChiffre; 
+export default TrouveChiffre;
