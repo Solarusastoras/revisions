@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ScoreCalculator from './ScoreCalculator';
 
-function Calculs() {
+function Calculs({ score, setScore }) {  // Ajouter les props ici
   const [answers, setAnswers] = useState(() => {
     const savedAnswers = localStorage.getItem('calculsAnswers');
     return savedAnswers ? JSON.parse(savedAnswers) : {};
@@ -27,7 +27,14 @@ function Calculs() {
     <section className="calculs-section">
       <h2>Complete 🧮</h2>
       <div className="exercise-buttons">
-        <ScoreCalculator answers={answers} correctAnswers={correctAnswers} localStorageKey="calculsAnswers" />
+        <ScoreCalculator 
+          answers={answers} 
+          correctAnswers={correctAnswers} 
+          localStorageKey="calculsAnswers"
+          score={score}
+          setScore={setScore}
+          setAnswers={setAnswers}
+        />
       </div>
       {calculs.map((item, index) => (
         <div key={index} className="exercise-row">

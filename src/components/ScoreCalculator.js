@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CalculateAverage from './Moyenne';
 
-function ScoreCalculator({ answers, correctAnswers, localStorageKey }) {
+function ScoreCalculator({ answers, correctAnswers, localStorageKey, setAnswers }) {  // Ajouter setAnswers aux props
   const [score, setScore] = useState(null);
   const [average, setAverage] = useState(null);
 
@@ -32,6 +32,7 @@ function ScoreCalculator({ answers, correctAnswers, localStorageKey }) {
     event.preventDefault();
     setScore(null);
     setAverage(null);
+    setAnswers({});  // Vider les réponses
     localStorage.removeItem(localStorageKey);
   };
 

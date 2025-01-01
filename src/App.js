@@ -7,11 +7,14 @@ import Calculs from './components/Calculs';
 import ArbreCalcul from './components/ArbreCalcul';
 import TrouveChiffre from './components/TrouveChiffre';
 import Resultat from './components/Resultat';
-import ScoreCalculator from './components/ScoreCalculator';
 
 function App() {
   const [currentExercise, setCurrentExercise] = useState('double');
-  const [score, setScore] = useState(null);
+
+  const handleExerciseChange = (event, exercise) => {
+    event.preventDefault();
+    setCurrentExercise(exercise);
+  };
 
   const renderExercise = () => {
     switch(currentExercise) {
@@ -39,52 +42,50 @@ function App() {
       <h1>Les Maths avec Nono 🌟</h1>
       
       <div className="exercise-buttons">
-      <button 
+        <button 
           className={currentExercise === 'resultat' ? 'active' : ''} 
-          onClick={() => setCurrentExercise('resultat')}
+          onClick={(event) => handleExerciseChange(event, 'resultat')}
         >
-         Moyenne 
+          Moyenne 
         </button>
-
         <button 
           className={currentExercise === 'double' ? 'active' : ''} 
-          onClick={() => setCurrentExercise('double')}
+          onClick={(event) => handleExerciseChange(event, 'double')}
         >
           Double 🎯
         </button>
         <button 
           className={currentExercise === 'moitie' ? 'active' : ''} 
-          onClick={() => setCurrentExercise('moitie')}
+          onClick={(event) => handleExerciseChange(event, 'moitie')}
         >
           Moitié 📏
         </button>
         <button 
           className={currentExercise === 'ecris' ? 'active' : ''} 
-          onClick={() => setCurrentExercise('ecris')}
+          onClick={(event) => handleExerciseChange(event, 'ecris')}
         >
           Écris ✏️
         </button>
         <button 
           className={currentExercise === 'calculs' ? 'active' : ''} 
-          onClick={() => setCurrentExercise('calculs')}
+          onClick={(event) => handleExerciseChange(event, 'calculs')}
         >
           C'est Calcul ! 🧮
         </button>
         <button 
           className={currentExercise === 'arbre' ? 'active' : ''} 
-          onClick={() => setCurrentExercise('arbre')}
+          onClick={(event) => handleExerciseChange(event, 'arbre')}
         >
           Arbre à calcul 🌳
         </button>
         <button 
           className={currentExercise === 'trouve' ? 'active' : ''} 
-          onClick={() => setCurrentExercise('trouve')}
+          onClick={(event) => handleExerciseChange(event, 'trouve')}
         >
           Trouve le chiffre 🔍
         </button>
       </div>
 
-      <ScoreCalculator score={score} setScore={setScore} />
       {renderExercise()}
     </div>
   );

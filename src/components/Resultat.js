@@ -4,6 +4,15 @@ import CalculateAverage from './Moyenne';
 function Resultat() {
   const [averages, setAverages] = useState([]);
   const [generalAverage, setGeneralAverage] = useState(null);
+  
+  const exerciseTitles = [
+    { key: 'double', title: 'Double 🎯' },
+    { key: 'moitie', title: 'Moitié 📏' },
+    { key: 'ecris', title: 'Écris ✏️' },
+    { key: 'calculs', title: 'C\'est Calcul ! 🧮' },
+    { key: 'arbre', title: 'Arbre à calcul 🌳' },
+    { key: 'trouve', title: 'Trouve le chiffre 🔍' }
+  ];
 
   useEffect(() => {
     const savedAverages = JSON.parse(localStorage.getItem('averageScores')) || [];
@@ -38,16 +47,27 @@ function Resultat() {
   return (
     <section className="resultat-section">
       <h2>Résultat 🌟</h2>
-      <button className="clear-button" onClick={calculateAverage} style={{ backgroundColor: 'pink', borderRadius: '5px' }}>Calculer la moyenne</button>
-      {averages.map((item, index) => (
-        <div key={index} className="average-display" style={{ fontSize: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span>Moyenne: {item.avg}/20 - Date: {item.date}</span>
-          <button onClick={() => deleteAverage(index)} style={{ backgroundColor: 'pink', borderRadius: '5px' }}>Supprimer</button>
-        </div>
-      ))}
+      <button className="clear-button" onClick={calculateAverage} style={{ backgroundColor: 'pink', borderRadius: '5px' }}>
+        Calculer la moyenne
+      </button>
+      <div className="averages-container" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '20px' }}>
+        {exerciseTitles.map((exercise, index) => (
+          <div key={index} className="average-row" style={{ 
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '10px',
+            backgroundColor: '#FFF0F5',
+            borderRadius: '5px'
+          }}>
+            <span style={{ minWidth: '200px' }}>{exercise.title}</span>
+            <span>Moyenne: {averages[index] ? Number(averages[index].avg).toFixed(2) : '0'}/20</span>
+          </div>
+        ))}
+      </div>
       {generalAverage !== null && (
         <div className="general-average-display" style={{ fontSize: '2rem', marginTop: '1rem' }}>
-          Moyenne Générale: {generalAverage}/20
+          Moyenne Générale: {Number(generalAverage).toFixed(2)}/20
         </div>
       )}
     </section>

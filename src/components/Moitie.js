@@ -31,9 +31,6 @@ function Moitie() {
   return (
     <section className="moitie-section">
       <h2>La Moitié 📏</h2>
-      <div className="exercise-buttons">
-        <ScoreCalculator answers={answers} correctAnswers={correctAnswers} localStorageKey="moitieAnswers" />
-      </div>
       {moities.map((item, index) => (
         <div key={index} className="exercise-row">
           <span>Moitié de {item.number}</span>

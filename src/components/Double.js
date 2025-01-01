@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ScoreCalculator from './ScoreCalculator';
 
-function Double() {
+function Double({ score, setScore }) {  // Ajouter les props ici
   const [answers, setAnswers] = useState(() => {
     const savedAnswers = localStorage.getItem('doubleAnswers');
     return savedAnswers ? JSON.parse(savedAnswers) : {};
@@ -31,9 +31,14 @@ function Double() {
   return (
     <section className="doubles-section">
       <h2>Le Double 🎯</h2>
-      <div className="exercise-buttons">
-        <ScoreCalculator answers={answers} correctAnswers={correctAnswers} localStorageKey="doubleAnswers" />
-      </div>
+      <ScoreCalculator 
+        answers={answers} 
+        correctAnswers={correctAnswers} 
+        localStorageKey="doubleAnswers"
+        score={score}
+        setScore={setScore}
+        setAnswers={setAnswers}  // Ajouter cette ligne
+      />
       {doubles.map((item, index) => (
         <div key={index} className="exercise-row">
           <span>Double de {item.number}</span>

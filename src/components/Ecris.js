@@ -24,9 +24,6 @@ function Ecris() {
   return (
     <section className="ecris-section">
       <h2>Écris les nombres en lettres ✏️</h2>
-      <div className="exercise-buttons">
-        <ScoreCalculator answers={answers} correctAnswers={correctAnswers} localStorageKey="ecrisAnswers" />
-      </div>
       {Object.entries(numberToWord).map(([number, word], index) => (
         <div key={index} className="exercise-row">
           <span>Écris le nombre</span>
