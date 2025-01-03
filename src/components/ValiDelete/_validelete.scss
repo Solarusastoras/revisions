@@ -19,7 +19,7 @@
       cursor: pointer;
       border-radius: 25px;
       height: 50px;
-      font-size: 1.7rem;
+      font-size: 1rem;
     }
 
     .clear-all-button {
@@ -30,6 +30,84 @@
       border: none;
       cursor: pointer;
       height: 50px;
-      font-size: 1.7rem;
+      font-size: 1rem;
     }
+}
+
+.validelete-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  
+  .score-section {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .buttons-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      .icon {
+        margin-right: 8px;
+        font-size: 1.2em;
+      }
+      
+      &:hover {
+        transform: translateY(-2px);
+      }
+      
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+
+    .validate-button {
+      background: linear-gradient(135deg, #4CAF50, #45a049);
+      color: white;
+      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+      
+      &:hover {
+        background: linear-gradient(135deg, #45a049, #3d8b40);
+        box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+      }
+    }
+
+    .clear-button {
+      background: linear-gradient(135deg, #ff4757, #ff6b81);
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+      
+      &:hover {
+        background: linear-gradient(135deg, #ff6b81, #ff4757);
+        box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .validelete-container {
+    .buttons-section {
+      flex-direction: column;
+      
+      button {
+        width: 100%;
+      }
+    }
+  }
 }

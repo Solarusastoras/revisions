@@ -1,6 +1,6 @@
 .ecris-section {
   padding: 20px;
-  background: linear-gradient(145deg, #f6f7f9, #ffffff);
+  background: linear-gradient(145deg, #d3dcee, #bf0fb6);
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.1);
   display: flex;
@@ -24,10 +24,11 @@
     border-radius: 10px;
     background: white;
     transition: transform 0.3s ease;
-    background-color: #c45289;
+    background-color: #e68bb7;
     width: 80%;
     border: 2px solid #FF69B4;
     box-shadow: 0 4px 8px rgba(255,105,180,0.1);
+    
 
     &:hover {
       transform: translateX(10px);
@@ -36,7 +37,7 @@
     span {
       color: rgb(0, 0, 0);
       font-size: 18px;
-      font-weight: 500;
+      font-weight: bold;
     }
 
     input {

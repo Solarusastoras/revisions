@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ScoreCalculator from '../ScoreCalculator/ScoreCalculator';
+import useValiDelete from '../ValiDelete/ValiDelete';
+import ValiDelete from '../ValiDelete/ValiDelete';
+import './_arbre_calcul.scss';
 
 function ArbreCalcul() {
   const [answers, setAnswers] = useState(() => {
-    const savedAnswers = localStorage.getItem('answers');
+    const savedAnswers = localStorage.getItem('arbreCalculAnswers');
     return savedAnswers ? JSON.parse(savedAnswers) : {};
   });
-  const [score, setScore] = useState(null);
-  const [average, setAverage] = useState(null);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [answersValidated, setAnswersValidated] = useState(false);
   
   const arbres = [
     {
@@ -32,128 +35,87 @@ function ArbreCalcul() {
     }
   ];
 
-  useEffect(() => {
-    localStorage.setItem('answers', JSON.stringify(answers));
-  }, [answers]);
-
   const correctAnswers = arbres.map(arbre => arbre.ligne3.resultat);
 
-  const calculateScore = () => {
-    let correctAnswers = 0;
-    arbres.forEach((arbre, index) => {
-      if (Number(answers[`resultat1_${index}`]) === arbre.ligne2.resultat1 &&
-          Number(answers[`resultat2_${index}`]) === arbre.ligne2.resultat2 &&
-          Number(answers[`final_${index}`]) === arbre.ligne3.resultat) {
-        correctAnswers += 1;
-      }
-    });
-    setScore((correctAnswers / arbres.length) * 20);
-  };
-
-  const calculateAverage = () => {
-    const totalScore = arbres.length * 20;
-    setAverage((score / totalScore) * 20);
-  };
-
-  const clearResults = () => {
-    setAnswers({});
-    setScore(null);
-    setAverage(null);
-    localStorage.removeItem('answers');
-  };
-
-  const clearExerciseResult = (index) => {
-    const newAnswers = { ...answers };
-    delete newAnswers[`resultat1_${index}`];
-    delete newAnswers[`resultat2_${index}`];
-    delete newAnswers[`final_${index}`];
-    setAnswers(newAnswers);
-  };
+  const {
+    handleAnswerChange,
+    clearExerciseResult,
+    validateAnswers,
+    handleClearAll
+  } = useValiDelete({
+    exerciseKey: 'arbreCalcul',
+    answers,
+    setShowFeedback,
+    setAnswersValidated
+  });
 
   return (
     <section className="arbre-section">
       <h2>Arbre à calcul 🌳</h2>
-      <ScoreCalculator 
-        answers={answers} 
-        correctAnswers={correctAnswers} 
-        localStorageKey="arbreCalculAnswers"
-        setAnswers={setAnswers}
+      <ValiDelete 
+        onValidate={validateAnswers}
+        onClear={handleClearAll}
+        scoreCalculator={
+          <ScoreCalculator 
+            answers={answers} 
+            correctAnswers={correctAnswers} 
+            localStorageKey="arbreCalculAnswers"
+            setAnswers={setAnswers}
+          />
+        }
       />
       {arbres.map((arbre, index) => (
         <div key={index} className="arbre-container">
-          {/* Première ligne - nombres de base */}
-          <div className="arbre-ligne1">
-            <span>{arbre.ligne1.num1}</span>
-            <span>+</span>
-            <span>{arbre.ligne1.num2}</span>
-            <span>+</span>
-            <span>{arbre.ligne1.num3}</span>
-            {arbre.ligne1.num4 && (
-              <>
-                <span>+</span>
-                <span>{arbre.ligne1.num4}</span>
-              </>
-            )}
-          </div>
-
-          {/* Deuxième ligne - premiers résultats */}
-          <div className="arbre-ligne2">
-            <input
-              type="number"
-              className="number-input"
-              placeholder="?"
-              value={answers[`resultat1_${index}`] || ''}
-              onChange={(e) => {
-                setAnswers({
-                  ...answers,
-                  [`resultat1_${index}`]: e.target.value
-                });
-              }}
-            />
-            <span>+</span>
-            <input
-              type="number"
-              className="number-input"
-              placeholder="?"
-              value={answers[`resultat2_${index}`] || ''}
-              onChange={(e) => {
-                setAnswers({
-                  ...answers,
-                  [`resultat2_${index}`]: e.target.value
-                });
-              }}
-            />
-          </div>
-
-          {/* Troisième ligne - résultat final */}
-          <div className="arbre-ligne3">
-            <input
-              type="number"
-              className="number-input"
-              placeholder="?"
-              value={answers[`final_${index}`] || ''}
-              onChange={(e) => {
-                setAnswers({
-                  ...answers,
-                  [`final_${index}`]: e.target.value
-                });
-              }}
-            />
-          </div>
-
-          {/* Feedback */}
-          {answers[`resultat1_${index}`] && answers[`resultat2_${index}`] && answers[`final_${index}`] && (
-            <div className="feedback-container">
-              <span className="feedback">
+          <div className="tree-content">
+            <div className="arbre-ligne1">
+              <span>{arbre.ligne1.num1}</span>
+              <span>+</span>
+              <span>{arbre.ligne1.num2}</span>
+              <span>+</span>
+              <span>{arbre.ligne1.num3}</span>
+              {arbre.ligne1.num4 && (
+                <>
+                  <span>+</span>
+                  <span>{arbre.ligne1.num4}</span>
+                </>
+              )}
+            </div>
+            <div className="arbre-ligne2">
+              <input
+                type="number"
+                className="number-input"
+                placeholder="?"
+                value={answers[`resultat1_${index}`] || ''}
+                onChange={(e) => handleAnswerChange(e, `resultat1_${index}`)}
+              />
+              <span>+</span>
+              <input
+                type="number"
+                className="number-input"
+                placeholder="?"
+                value={answers[`resultat2_${index}`] || ''}
+                onChange={(e) => handleAnswerChange(e, `resultat2_${index}`)}
+              />
+            </div>
+            <div className="arbre-ligne3">
+              <input
+                type="number"
+                className="number-input"
+                placeholder="?"
+                value={answers[`final_${index}`] || ''}
+                onChange={(e) => handleAnswerChange(e, `final_${index}`)}
+              />
+            </div>
+            {showFeedback && (
+              <div className="feedback">
                 {Number(answers[`resultat1_${index}`]) === arbre.ligne2.resultat1 &&
                  Number(answers[`resultat2_${index}`]) === arbre.ligne2.resultat2 &&
                  Number(answers[`final_${index}`]) === arbre.ligne3.resultat
                   ? '✅ Bravo Nono ! Tes calculs sont justes ! 🌟'
                   : '❌ Essaie encore Nono ! Tu peux y arriver ! 💪'}
-              </span>
-            </div>
-          )}
-          <button className="clear-button" onClick={() => clearExerciseResult(index)}>Effacer</button>
+              </div>
+            )}
+          </div>
         </div>
       ))}
     </section>

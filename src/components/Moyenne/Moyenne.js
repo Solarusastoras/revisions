@@ -48,7 +48,7 @@ function Moyenne() {
             correctAnswers: [5, 6, 11, 6, 18, 3, 10, 24, 9, 38, 8, 4]
         },
         {
-            name: 'C\'est Calcul ! 🧮',
+            name: 'Calcul en ligne ! 🧮',
             key: 'calculsAnswers',
             correctAnswers: [9, 6, 18, 10, 20]
         },
