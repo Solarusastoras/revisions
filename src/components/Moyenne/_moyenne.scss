@@ -1,0 +1,111 @@
+.bulletin-container {
+  padding: 2rem;
+  background-color: #fff9fc;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
+  max-width: 1200px;
+  margin: 2rem auto;
+  border: 2px solid #ffb6c1;
+
+  h2 {
+    text-align: center;
+    color: #ff69b4;
+    margin-bottom: 2rem;
+    font-size: 2.2em;
+    font-family: 'Comic Sans MS', cursive;
+    text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.3);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    margin-bottom: 2rem;
+
+    th {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 3px solid #ffb6c1;
+      background-color: #fff0f5;
+      color: #ff69b4;
+      font-weight: 600;
+      font-family: 'Comic Sans MS', cursive;
+
+      &:first-child { border-radius: 12px 0 0 12px; }
+      &:last-child { border-radius: 0 12px 12px 0; }
+    }
+
+    td {
+      padding: 1rem;
+      background-color: #fff;
+      border-bottom: 2px solid #ffe4e1;
+
+      &:first-child { 
+        border-radius: 12px 0 0 12px;
+        color: #ff69b4;
+        font-weight: 500;
+      }
+      &:last-child { border-radius: 0 12px 12px 0; }
+
+      input {
+        width: 70px;
+        padding: 0.5rem;
+        text-align: center;
+        border: 2px solid #ffb6c1;
+        border-radius: 12px;
+        font-size: 1em;
+        background-color: #fff;
+        color: #ff69b4;
+        transition: all 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: #ff69b4;
+          box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
+        }
+      }
+    }
+
+    tr {
+      transition: transform 0.2s ease;
+      
+      &:hover {
+        transform: scale(1.02);
+        background-color: #fff0f5;
+      }
+    }
+  }
+
+  .moyenne-generale {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #fff0f5;
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid #ffb6c1;
+    position: relative;
+
+    &::before {
+      content: '🎀';
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5em;
+    }
+
+    h3 {
+      color: #ff69b4;
+      margin-bottom: 1rem;
+      font-size: 1.5em;
+      font-family: 'Comic Sans MS', cursive;
+    }
+
+    .appreciation {
+      font-size: 1.1em;
+      color: #ff69b4;
+      font-weight: 500;
+      font-family: 'Comic Sans MS', cursive;
+    }
+  }
+}

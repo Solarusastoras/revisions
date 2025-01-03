@@ -7,30 +7,21 @@ function ScoreCalculator({
   correctAnswers = [], 
   exerciseKey = '', 
   answersValidated = false,
-  compareFunction = (a, b) => a === b,
-  answers = {} // Ajouter ce prop
+  compareFunction = (a, b) => a === b 
 }) {
   const [score, setScore] = useState(null);
   const dispatch = useDispatch();
+  const answers = useSelector(state => state.scores[`${exerciseKey}Answers`]) || {};
   const savedScore = useSelector(state => state.scores.savedScores[exerciseKey]);
 
-  useEffect(() => {
-    if (savedScore !== undefined) {
-      setScore(savedScore);
-    }
-  }, [savedScore]);
-
   const calculateScore = () => {
-    if (!answersValidated) {
-      alert("Veuillez d'abord valider vos réponses !");
-      return;
-    }
-
     let correctCount = 0;
+    
     correctAnswers.forEach((correctAnswer, index) => {
       const userAnswer = answers[`answer_${index}`];
-      if (userAnswer !== undefined && compareFunction(userAnswer, correctAnswer)) {
-        correctCount += 1;
+      if (userAnswer !== undefined && userAnswer !== '' && 
+          compareFunction(Number(userAnswer) || userAnswer, correctAnswer)) {
+        correctCount++;
       }
     });
 
@@ -39,7 +30,6 @@ function ScoreCalculator({
       : 0;
 
     setScore(calculatedScore);
-    
     dispatch(saveCalculatedScore({
       exercise: exerciseKey,
       score: calculatedScore
@@ -47,10 +37,14 @@ function ScoreCalculator({
   };
 
   useEffect(() => {
+    if (savedScore !== undefined) {
+      setScore(savedScore);
+    }
+  }, [savedScore]);
+
+  useEffect(() => {
     if (answersValidated) {
       calculateScore();
-    } else {
-      setScore(null);
     }
   }, [answersValidated, answers]);
 

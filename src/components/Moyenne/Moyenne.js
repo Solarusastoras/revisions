@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveCalculatedScore } from '../../store/scoresSlice';
+import './_moyenne.scss';
 
 function Moyenne() {
     const dispatch = useDispatch();
@@ -74,6 +75,7 @@ function Moyenne() {
     };
 
     const getAppreciation = (score) => {
+        if (!score) return "";  // Retourne une chaîne vide si score est 0
         if (score >= 16) return "Excellent! 🌟";
         if (score >= 14) return "Très bien! ⭐";
         if (score >= 12) return "Bien! 👍";
@@ -86,69 +88,46 @@ function Moyenne() {
         .reduce((acc, curr) => acc + curr, 0) / exercises.length;
 
     return (
-        <div className="bulletin-container" style={{ 
-            padding: '20px',
-            backgroundColor: '#fff',
-            borderRadius: '10px',
-            boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-            maxWidth: '1200px',
-            margin: '20px auto'
-        }}>
-            <h2 style={{ textAlign: 'center', color: '#333', marginBottom: '20px' }}>
-                Bulletin de Notes de Nono 📝
-            </h2>
+        <div className="bulletin-container">
+            <h2>Bulletin de Notes de Nono 📝</h2>
 
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <table>
                 <thead>
-                    <tr style={{ backgroundColor: '#f8f9fa' }}>
-                        <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #dee2e6' }}>Exercice</th>
-                        <th style={{ padding: '12px', textAlign: 'center', borderBottom: '2px solid #dee2e6' }}>Note /20</th>
-                        <th style={{ padding: '12px', textAlign: 'left', borderBottom: '2px solid #dee2e6' }}>Appréciation</th>
+                    <tr>
+                        <th>Exercice</th>
+                        <th>Note /20</th>
+                        <th>Appréciation</th>
                     </tr>
                 </thead>
                 <tbody>
                     {exercises.map((exercise, index) => {
                         const score = scores.savedScores[exercise.key] || 0;
                         return (
-                            <tr key={index} style={{ borderBottom: '1px solid #dee2e6' }}>
-                                <td style={{ padding: '12px' }}>{exercise.name}</td>
-                                <td style={{ padding: '12px', textAlign: 'center' }}>
+                            <tr key={index}>
+                                <td>{exercise.name}</td>
+                                <td>
                                     <input
                                         type="number"
                                         min="0"
                                         max="20"
                                         step="0.5"
-                                        value={score}
+                                        value={score === 0 ? '' : score}
                                         onChange={(e) => handleScoreChange(exercise, e.target.value)}
-                                        style={{
-                                            width: '60px',
-                                            padding: '5px',
-                                            textAlign: 'center',
-                                            border: '1px solid #dee2e6',
-                                            borderRadius: '4px',
-                                            fontSize: '1em'
-                                        }}
                                     />
                                 </td>
-                                <td style={{ padding: '12px' }}>{getAppreciation(score)}</td>
+                                <td className={score === 0 ? 'empty-appreciation' : ''}>
+                                    {getAppreciation(score)}
+                                </td>
                             </tr>
                         );
                     })}
                 </tbody>
             </table>
 
-            <div style={{ 
-                marginTop: '20px',
-                padding: '15px',
-                backgroundColor: '#f8f9fa',
-                borderRadius: '5px',
-                textAlign: 'center'
-            }}>
-                <h3 style={{ color: '#333', marginBottom: '10px' }}>
-                    Moyenne Générale: {averageScore.toFixed(2)}/20
-                </h3>
-                <p style={{ fontSize: '1.1em', color: '#666' }}>
-                    Appréciation générale: {getAppreciation(averageScore)}
+            <div className="moyenne-generale">
+                <h3>Moyenne Générale: {averageScore > 0 ? averageScore.toFixed(2) : '-'}/20</h3>
+                <p className="appreciation">
+                    {averageScore > 0 && `Appréciation générale: ${getAppreciation(averageScore)}`}
                 </p>
             </div>
         </div>

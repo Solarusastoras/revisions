@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveScore, clearScore, saveCalculatedScore } from '../../store/scoresSlice';
 import ScoreCalculator from '../ScoreCalculator/ScoreCalculator';
-import useValiDelete from '../ValiDelete/ValiDelete';
 import ValiDelete from '../ValiDelete/ValiDelete';
 import './_trouve_chiffre.scss';
 
 function TrouveChiffre() {  
-  const [answers, setAnswers] = useState(() => {
-    const savedAnswers = localStorage.getItem('trouveChiffreAnswers');
-    return savedAnswers ? JSON.parse(savedAnswers) : {};
-  });
+  const dispatch = useDispatch();
+  const answers = useSelector(state => state.scores.trouveChiffreAnswers) || {};
   const [showFeedback, setShowFeedback] = useState(false);
   const [answersValidated, setAnswersValidated] = useState(false);
   
@@ -29,17 +28,32 @@ function TrouveChiffre() {
 
   const correctAnswers = exercices.map(exercice => exercice.result - exercice.num1);
 
-  const {
-    handleAnswerChange,
-    clearExerciseResult,
-    validateAnswers,
-    handleClearAll
-  } = useValiDelete({
-    exerciseKey: 'trouveChiffre',
-    answers,
-    setShowFeedback,
-    setAnswersValidated
-  });
+  const handleAnswerChange = (e, index) => {
+    setAnswersValidated(false);
+    setShowFeedback(false);
+    dispatch(saveScore({
+      exercise: 'trouveChiffre',
+      answers: {
+        ...answers,
+        [`answer_${index}`]: e.target.value
+      }
+    }));
+  };
+
+  const validateAnswers = () => {
+    setShowFeedback(true);
+    setAnswersValidated(true);
+  };
+
+  const handleClearAll = () => {
+    dispatch(clearScore('trouveChiffre'));
+    setShowFeedback(false);
+    setAnswersValidated(false);
+    dispatch(saveCalculatedScore({
+      exercise: 'trouveChiffre',
+      score: null
+    }));
+  };
 
   return (
     <section className="trouve-chiffre-section">
@@ -49,10 +63,9 @@ function TrouveChiffre() {
         onClear={handleClearAll}
         scoreCalculator={
           <ScoreCalculator 
-            answers={answers} 
-            correctAnswers={correctAnswers} 
-            localStorageKey="trouveChiffreAnswers"
-            setAnswers={setAnswers}
+            correctAnswers={correctAnswers}
+            exerciseKey="trouveChiffre"
+            answersValidated={answersValidated}
           />
         }
       />
@@ -65,20 +78,17 @@ function TrouveChiffre() {
             className="number-input"
             placeholder="?"
             value={answers[`answer_${index}`] || ''}
-            onChange={(e) => {
-              handleAnswerChange(e, index);
-            }}
+            onChange={(e) => handleAnswerChange(e, index)}
           />
           <span>=</span>
           <span>{exercice.result}</span>
-          {answers[`answer_${index}`] && (
+          {showFeedback && answers[`answer_${index}`] && (
             <span className="feedback">
               {Number(answers[`answer_${index}`]) === (exercice.result - exercice.num1)
                 ? '✅ Bravo Nono ! Tu as trouvé le bon chiffre ! 🌟' 
                 : '❌ Essaie encore Nono ! Tu peux y arriver ! 💪'}
             </span>
           )}
-        
         </div>
       ))}
     </section>

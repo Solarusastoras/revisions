@@ -23,10 +23,14 @@ function Ecris() {
 
   const correctAnswers = Object.values(numberToWord);
 
+  const normalizeAnswer = (answer) => {
+    return answer.toLowerCase().trim();
+  };
+
   const handleAnswerChange = (index, value) => {
     const newAnswers = {
       ...answers,
-      [`answer_${index}`]: value
+      [`answer_${index}`]: value.trim()  // Trim on input
     };
     dispatch(saveScore({
       exercise: 'ecris',
@@ -63,7 +67,7 @@ function Ecris() {
               exerciseKey="ecris"
               answersValidated={answersValidated}
               compareFunction={(userAnswer, correctAnswer) => 
-                userAnswer.toLowerCase().trim() === correctAnswer
+                normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer)
               }
             />
           ) : null
@@ -81,7 +85,7 @@ function Ecris() {
           />
           {answersValidated && answers[`answer_${index}`] && (
             <span className="feedback">
-              {answers[`answer_${index}`].toLowerCase() === word
+              {normalizeAnswer(answers[`answer_${index}`]) === normalizeAnswer(word)
                 ? '✅ Bravo Nono ! C\'est bien écrit ! 🌟' 
                 : '❌ Essaie encore Nono ! Tu peux y arriver ! 💪'}
             </span>

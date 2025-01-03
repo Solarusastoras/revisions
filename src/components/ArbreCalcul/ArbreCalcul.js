@@ -48,18 +48,17 @@ function ArbreCalcul() {
     setAnswersValidated(true);
     setShowFeedback(true);
     
-    // Créer une copie des réponses existantes
-    const allAnswers = { ...answers };
-    
-    // Ajouter les réponses formatées pour le score sans écraser les existantes
+    // Format answers for score calculation
+    const formattedAnswers = {};
     arbres.forEach((_, index) => {
-      allAnswers[`answer_${index}`] = answers[`final_${index}`];
+      // Stocker uniquement les réponses finales avec le bon format de clé
+      formattedAnswers[`answer_${index}`] = answers[`final_${index}`];
     });
     
-    // Sauvegarder toutes les réponses
-    localStorage.setItem('arbreCalculAnswers', JSON.stringify(allAnswers));
-    // Mettre à jour l'état en gardant toutes les réponses
-    setAnswers(allAnswers);
+    // Sauvegarder les réponses formatées
+    localStorage.setItem('arbreCalculAnswers', JSON.stringify(formattedAnswers));
+    // Mettre à jour l'état avec les réponses formatées
+    setAnswers(formattedAnswers);
   };
 
   const handleClearAll = () => {

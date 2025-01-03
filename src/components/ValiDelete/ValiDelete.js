@@ -1,5 +1,33 @@
 import React from 'react';
 import './_validelete.scss';
+import { useState, useCallback } from 'react';
+
+const useValiDelete = ({ 
+  exerciseKey, 
+  answers, 
+  setAnswers,  // Add setAnswers to parameters
+  setShowFeedback, 
+  setAnswersValidated 
+}) => {
+  // ...existing code...
+
+  const handleAnswerChange = useCallback((e, index) => {
+    const value = e.target.value;
+    const newAnswers = {
+      ...answers,
+      [`answer_${index}`]: value
+    };
+    
+    localStorage.setItem(`${exerciseKey}Answers`, JSON.stringify(newAnswers));
+    setAnswers(newAnswers);
+    setShowFeedback(true);
+  }, [answers, exerciseKey, setAnswers, setShowFeedback]);
+
+  return {
+    handleAnswerChange,
+    // ...existing code...
+  };
+};
 
 function ValiDelete({ onValidate, onClear, scoreCalculator }) {
   return (
