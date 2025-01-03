@@ -157,3 +157,73 @@ h2 {
     border-radius: 2px;
   }
 }
+
+.arbre-section {
+  // ...existing styles...
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+
+    .score-container {
+      background-color: #fff0f5;
+      padding: 15px 30px;
+      border-radius: 15px;
+      border: 2px solid #ffb6c1;
+      text-align: center;
+      margin-bottom: 10px;
+      min-width: 200px;
+
+      .score {
+        font-size: 1.2em;
+        color: #ff69b4;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .appreciation {
+        font-family: 'Comic Sans MS', cursive;
+        color: #ff69b4;
+        font-size: 1.1em;
+        animation: bounce 0.5s;
+      }
+    }
+
+    .buttons-container {
+      display: flex;
+      flex-direction: row;
+      gap: 15px;
+
+      button {
+        padding: 10px 20px;
+        border-radius: 25px;
+        border: none;
+        font-size: 1em;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+
+        &.validate-btn {
+          background-color: #ff69b4;
+          color: white;
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+          }
+        }
+
+        &.clear-btn {
+          background-color: #ff0055;
+          color: #ffffff;
+          border: 2px solid #ff69b4;
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
+          }
+        }
+      }
+    }
+  }
+}

@@ -51,16 +51,13 @@
     gap: 20px;
     
     button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.5rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
+        padding: 10px 20px;
+        border-radius: 25px;
+        border: none;
+        font-size: 1em;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+
       
       .icon {
         margin-right: 8px;
@@ -77,25 +74,22 @@
     }
 
     .validate-button {
-      background: linear-gradient(135deg, #4CAF50, #45a049);
-      color: white;
-      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-      
-      &:hover {
-        background: linear-gradient(135deg, #45a049, #3d8b40);
-        box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-      }
+        background-color: #ff69b4;
+        color: white;
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+        }
     }
 
     .clear-button {
-      background: linear-gradient(135deg, #ff4757, #ff6b81);
-      color: white;
-      box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
-      
-      &:hover {
-        background: linear-gradient(135deg, #ff6b81, #ff4757);
-        box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
-      }
+        background-color: #ff0000;
+        color: rgb(255, 255, 255);
+        border: 2px solid #ff69b4;
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(255, 105, 180, 0.2);
+        }
     }
   }
 }

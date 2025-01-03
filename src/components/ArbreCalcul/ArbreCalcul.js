@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import ScoreCalculator from '../ScoreCalculator/ScoreCalculator';
-import ValiDelete from '../ValiDelete/ValiDelete';
+import React, { useState } from 'react';
 import './_arbre_calcul.scss';
 
 function ArbreCalcul() {
-  const [answers, setAnswers] = useState(() => {
-    const savedAnswers = localStorage.getItem('arbreCalculAnswers');
-    return savedAnswers ? JSON.parse(savedAnswers) : {};
-  });
+  const [answers, setAnswers] = useState({});
   const [showFeedback, setShowFeedback] = useState(false);
-  const [answersValidated, setAnswersValidated] = useState(false);
+  const [score, setScore] = useState(0);
   
   const arbres = [
     {
@@ -34,58 +29,84 @@ function ArbreCalcul() {
     }
   ];
 
-  const correctAnswers = arbres.map(arbre => arbre.ligne3.resultat);
+  const getFeedbackMessage = (isCorrect) => {
+    if (isCorrect) {
+      const messages = [
+        "✨ Waouh ! C'est parfait ! 🎀",
+        "🌈 Super calcul ! Tu es très forte ! 💖",
+        "🎯 Excellent ! Continue comme ça ! ⭐",
+        "🌟 Bravo Nono ! C'est tout juste ! 🎈",
+        "🦄 Magnifique ! Tu es une championne ! 🌸"
+      ];
+      return messages[Math.floor(Math.random() * messages.length)];
+    }
+    return "❌ Essaie encore !";
+  };
 
   const handleAnswerChange = (e, key) => {
-    const newAnswers = { 
-      ...answers, 
-      [key]: e.target.value
-    };
-    setAnswers(newAnswers);
+    const value = e.target.value;
+    setAnswers(prev => ({
+      ...prev,
+      [key]: value
+    }));
+    setShowFeedback(false);
+  };
+
+  const calculateScore = () => {
+    let correctCount = 0;
+    arbres.forEach((arbre, index) => {
+      if (Number(answers[`final_${index}`]) === arbre.ligne3.resultat) {
+        correctCount++;
+      }
+    });
+    return (correctCount / arbres.length) * 20;
   };
 
   const validateAnswers = () => {
-    setAnswersValidated(true);
     setShowFeedback(true);
-    
-    // Format answers for score calculation
-    const formattedAnswers = {};
-    arbres.forEach((_, index) => {
-      // Stocker uniquement les réponses finales avec le bon format de clé
-      formattedAnswers[`answer_${index}`] = answers[`final_${index}`];
-    });
-    
-    // Sauvegarder les réponses formatées
-    localStorage.setItem('arbreCalculAnswers', JSON.stringify(formattedAnswers));
-    // Mettre à jour l'état avec les réponses formatées
-    setAnswers(formattedAnswers);
+    setScore(calculateScore());
   };
 
   const handleClearAll = () => {
     setAnswers({});
     setShowFeedback(false);
-    setAnswersValidated(false);
-    localStorage.removeItem('arbreCalculAnswers');
+    setScore(0);
+  };
+
+  const getAppreciation = (score) => {
+    if (score >= 16) return "Excellent ! Tu es une championne ! 🌟";
+    if (score >= 14) return "Très bien ! Continue comme ça ! ⭐";
+    if (score >= 12) return "Bien ! Tu progresses ! 🎯";
+    if (score >= 10) return "Assez bien ! Courage ! 💪";
+    if (score > 0) return "Continue tes efforts ! Tu peux y arriver ! 🌈";
+    return "Commence l'exercice ! 📝";
   };
 
   return (
     <section className="arbre-section">
       <h2>Arbre à calcul 🌳</h2>
-      <ValiDelete 
-        onValidate={validateAnswers}
-        onClear={handleClearAll}
-        scoreCalculator={
-          <ScoreCalculator 
-            correctAnswers={correctAnswers}
-            exerciseKey="arbreCalcul"
-            answersValidated={answersValidated}
-            compareFunction={(userAnswer, correctAnswer) => 
-              Number(userAnswer) === Number(correctAnswer)
-            }
-            answers={answers} // Ajouter cette prop
-          />
-        }
-      />
+      
+      <div className="controls">
+        {showFeedback && (
+          <div className="score-container">
+            <div className="score">
+              Note : {score.toFixed(2)}/20
+            </div>
+            <div className="appreciation">
+              {getAppreciation(score)}
+            </div>
+          </div>
+        )}
+        <div className="buttons-container">
+          <button onClick={validateAnswers} className="validate-btn">
+            Correction ✅
+          </button>
+          <button onClick={handleClearAll} className="clear-btn">
+            Tout effacer 🗑️
+          </button>
+        </div>
+      </div>
+
       {arbres.map((arbre, index) => (
         <div key={index} className="arbre-container">
           <div className="tree-content">
@@ -128,13 +149,13 @@ function ArbreCalcul() {
                 onChange={(e) => handleAnswerChange(e, `final_${index}`)}
               />
             </div>
-            {showFeedback && (
-              <div className="feedback">
-                {Number(answers[`resultat1_${index}`]) === arbre.ligne2.resultat1 &&
-                 Number(answers[`resultat2_${index}`]) === arbre.ligne2.resultat2 &&
-                 Number(answers[`final_${index}`]) === arbre.ligne3.resultat
-                  ? '✅ Bravo Nono ! Tes calculs sont justes ! 🌟'
-                  : '❌ Essaie encore Nono ! Tu peux y arriver ! 💪'}
+            {showFeedback && answers[`final_${index}`] && (
+              <div className={`feedback ${Number(answers[`final_${index}`]) === arbre.ligne3.resultat ? 'correct' : ''}`}>
+                {getFeedbackMessage(
+                  Number(answers[`resultat1_${index}`]) === arbre.ligne2.resultat1 &&
+                  Number(answers[`resultat2_${index}`]) === arbre.ligne2.resultat2 &&
+                  Number(answers[`final_${index}`]) === arbre.ligne3.resultat
+                )}
               </div>
             )}
           </div>

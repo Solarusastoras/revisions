@@ -40,15 +40,15 @@ function ValiDelete({ onValidate, onClear, scoreCalculator }) {
           className="validate-button"
           onClick={onValidate}
         >
-          <span className="icon">✓</span>
-          Correction
+          <span className="icon"></span>
+          Correction ✅
         </button>
         <button 
           className="clear-button"
           onClick={onClear}
         >
-          <span className="icon">↺</span>
-          Tout effacer
+          <span className="icon"></span>
+          Tout effacer 🗑️
         </button>
       </div>
     </div>
