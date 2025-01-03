@@ -9,20 +9,20 @@ const scoresSlice = createSlice({
     calculsAnswers: {},
     arbreCalculAnswers: {},
     trouveChiffreAnswers: {},
-    savedScores: {} // Nouveau: pour stocker les scores calculés
+    savedScores: {}
   },
   reducers: {
     saveScore: (state, action) => {
       const { exercise, answers } = action.payload;
       state[`${exercise}Answers`] = answers;
     },
-    // Nouveau reducer pour sauvegarder le score calculé
+  
     saveCalculatedScore: (state, action) => {
       const { exercise, score } = action.payload;
       state.savedScores[exercise] = score;
     },
     clearScore: (state, action) => {
-      const exercise = action.payload;
+      const exercise = action.payload
       state[`${exercise}Answers`] = {};
       state.savedScores[exercise] = null;
     },

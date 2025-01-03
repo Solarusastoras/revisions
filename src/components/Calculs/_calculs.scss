@@ -1,6 +1,6 @@
 .calculs-section {
   padding: 25px;
-  background: linear-gradient(145deg, #f6f7f9, #ffffff);
+  background: linear-gradient( #f7caed, #d3a5eb);
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.1);
   display: flex;
@@ -45,35 +45,35 @@
 
     &:nth-child(3) {
       background: linear-gradient(to right, #ff6b6b20, #ff6b6b40);
-      span { color: #ff6b6b; }
+      span { color: #000000; }
       .number-input { border-color: #ff6b6b; }
       &:focus-within { box-shadow: 0 4px 12px #ff6b6b40; }
     }
 
     &:nth-child(4) {
       background: linear-gradient(to right, #4ecdc420, #4ecdc440);
-      span { color: #4ecdc4; }
-      .number-input { border-color: #4ecdc4; }
+      span { color: #000000; }
+      .number-input { border-color: #14c2b6; }
       &:focus-within { box-shadow: 0 4px 12px #4ecdc440; }
     }
 
     &:nth-child(5) {
       background: linear-gradient(to right, #ffd93d20, #ffd93d40);
-      span { color: #ffd93d; }
+      span { color: #000000; }
       .number-input { border-color: #ffd93d; }
       &:focus-within { box-shadow: 0 4px 12px #ffd93d40; }
     }
 
     &:nth-child(6) {
       background: linear-gradient(to right, #6c5ce720, #6c5ce740);
-      span { color: #6c5ce7; }
+      span { color: #000000; }
       .number-input { border-color: #6c5ce7; }
       &:focus-within { box-shadow: 0 4px 12px #6c5ce740; }
     }
 
     &:nth-child(7) {
       background: linear-gradient(to right, #a8e6cf20, #a8e6cf40);
-      span { color: #3d8168; }
+      span { color: #000000; }
       .number-input { border-color: #3d8168; }
       &:focus-within { box-shadow: 0 4px 12px #a8e6cf40; }
     }
