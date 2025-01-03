@@ -21,13 +21,14 @@
     align-items: center;
     margin: 20px 0;
     padding: 15px;
-    border-radius: 10px;
-    background: white;
+    border-radius: 20px;
+    background: antiquewhite;
     transition: transform 0.3s ease;
     background-color: #e68bb7;
     width: 80%;
-    border: 2px solid #FF69B4;
+    border: 2px solid #000000;
     box-shadow: 0 4px 8px rgba(255,105,180,0.1);
+    
     
 
     &:hover {
@@ -38,6 +39,7 @@
       color: rgb(0, 0, 0);
       font-size: 18px;
       font-weight: bold;
+      font-size: 1.9rem;
     }
 
     input {
@@ -49,6 +51,7 @@
       transition: all 0.3s ease;
       background: white;
       color: #FF69B4;
+      font-size: 1.9rem;
 
       &:focus {
         outline: none;

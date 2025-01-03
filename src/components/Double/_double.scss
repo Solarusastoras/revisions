@@ -23,8 +23,9 @@
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    color: aliceblue;
+    color: rgb(0, 0, 0);
     width: 80%;
+    font-weight: bold;
 
     input {
       width: 80px;
@@ -45,6 +46,53 @@
       margin-left: 15px;
       font-size: 20px;
       animation: bounce 0.5s;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      min-width: 200px;
+      
+      // Style spécifique pour le message d'erreur
+      &:not(.correct) {
+        color: #ff4444;
+        background: #fff;
+        padding: 8px 15px;
+        border-radius: 20px;
+        border: 2px solid #ff4444;
+      }
+      
+      &.correct {
+        color: #ff69b4;
+        font-family: 'Comic Sans MS', cursive;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 15px;
+        background: #fff;
+        border-radius: 20px;
+        border: 2px solid #ffb6c1;
+        box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
+        
+        &::before {
+          content: '✨';
+        }
+        
+        &::after {
+          content: '✨';
+        }
+      }
     }
   }
+}
+
+@keyframes bounce {
+  0% { transform: scale(0.3); }
+  50% { transform: scale(1.2); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+@keyframes sparkle {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
 }

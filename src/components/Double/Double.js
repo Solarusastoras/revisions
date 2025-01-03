@@ -78,6 +78,20 @@ function Double() {
     setShuffledDoubles(shuffleArray(doubles));
   };
 
+  const getFeedbackMessage = (isCorrect) => {
+    if (isCorrect) {
+        const messages = [
+            "✅ Bravo Nono ! Tu es super forte ! 🌟",
+            "✨ Waouh ! C'est parfait ! 🎀",
+            "🌈 Incroyable ! Tu as tout bon ! 💖",
+            "🎯 Excellent travail ! Tu brilles ! ⭐",
+            "🦄 Magnifique ! Continue comme ça ! 🌸"
+        ];
+        return messages[Math.floor(Math.random() * messages.length)];
+    }
+    return "❌ Essaie encore !";
+  };
+
   return (
     <section className="double-section">
       <h2>Le Double 🎯</h2>
@@ -104,7 +118,9 @@ function Double() {
           />
           {showFeedback && answers[`answer_${index}`] && (
             <span className="feedback">
-              {Number(answers[`answer_${index}`]) === item.number * 2 ? '✅' : '❌'}
+              {Number(answers[`answer_${index}`]) === item.number * 2 ?
+              getFeedbackMessage(true) 
+              : getFeedbackMessage(false)}
             </span>
           )}
         </div>

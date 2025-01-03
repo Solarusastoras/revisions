@@ -1,6 +1,6 @@
 .moitie-section {
   padding: 20px;
-  background-color: #FFF0F5;
+  background-color: #f5c9d8;
   border-radius: 15px;
   margin: 20px 0;
   display: flex;
@@ -19,12 +19,13 @@
     gap: 10px;
     margin-bottom: 15px;
     font-size: 24px;
-    background-color: rgb(123, 0, 255);
+    background-color: rgb(196, 162, 232);
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    color: aliceblue;
+    color: rgb(0, 0, 0);
     width: 80%;
+    font-weight: bold;
     
     input {
       width: 60px;
@@ -33,13 +34,13 @@
       border-radius: 8px;
       text-align: center;
       font-size: 20px;
-      color: #FF69B4;
     }
 
     .feedback {
       margin-left: 10px;
       font-size: 0.9em;
       animation: bounce 0.5s;
+      background-color: #FF69B4;
     }
 
     .clear-button {
