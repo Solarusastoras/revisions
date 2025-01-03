@@ -1,0 +1,114 @@
+.ecris-section {
+  padding: 20px;
+  background: linear-gradient(145deg, #f6f7f9, #ffffff);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+
+  h2 {
+    color: #FF69B4;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .exercise-row {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 10px;
+    background: white;
+    transition: transform 0.3s ease;
+    background-color: #c45289;
+    width: 80%;
+    border: 2px solid #FF69B4;
+    box-shadow: 0 4px 8px rgba(255,105,180,0.1);
+
+    &:hover {
+      transform: translateX(10px);
+    }
+
+    span {
+      color: rgb(0, 0, 0);
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    input {
+      width: 250px !important;
+      padding: 12px 20px;
+      border: 2px solid #000000;
+      border-radius: 25px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      background: white;
+      color: #FF69B4;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(255,105,180,0.3);
+        transform: scale(1.02);
+      }
+
+      &::placeholder {
+        color: rgba(255,105,180,0.5);
+      }
+    }
+
+    .feedback {
+      margin-left: 15px;
+      font-weight: 500;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      background: rgba(255,255,255,0.2);
+    }
+  }
+
+  input {
+    width: 200px !important;
+    text-align: left !important;
+    padding: 0 15px;
+  }
+}
+
+.number-to-write {
+  font-size: 28px;
+  font-weight: bold;
+  color: #FF69B4;
+  background-color: white;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 3px solid #FF69B4;
+  margin: 0 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(255,105,180,0.2);
+
+  &:hover {
+    transform: scale(1.1) rotate(10deg);
+    background-color: #FF69B4;
+    color: white;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

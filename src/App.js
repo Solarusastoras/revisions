@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import './App.css';
-import Double from './components/Double';
-import Moitie from './components/Moitie';
-import Ecris from './components/Ecris';
-import Calculs from './components/Calculs';
-import ArbreCalcul from './components/ArbreCalcul';
-import TrouveChiffre from './components/TrouveChiffre';
-import Moyenne from './components/Moyenne';
-
+import Double from './components/Double/Double';
+import Moitie from './components/Moitie/Moitie';
+import Ecris from './components/Ecris/Ecris';
+import Calculs from './components/Calculs/Calculs';
+import ArbreCalcul from './components/ArbreCalcul/ArbreCalcul';
+import TrouveChiffre from './components/TrouveChiffre/TrouveChiffre';
+import Moyenne from './components/Moyenne/Moyenne';
 
 function App() {
   const [currentExercise, setCurrentExercise] = useState('double');
@@ -43,14 +42,14 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <h1>Les Maths avec Nono 🌟</h1>
+        <h1>Les Maths CP de Nono 🌟</h1>
         
         <div className="exercise-buttons">
           <button 
             className={currentExercise === 'moyenne' ? 'active' : ''} 
             onClick={(event) => handleExerciseChange(event, 'moyenne')}
           >
-            Moyenne 
+           Bulletin de note 
           </button>
           <button 
             className={currentExercise === 'double' ? 'active' : ''} 

@@ -1,0 +1,106 @@
+.trouve-chiffre-section {
+  padding: 30px;
+  background-color: #7f76c4;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+
+  h2 {
+    color: #ffffff;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .exercise-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: linear-gradient(
+      45deg,
+      rgba(255, 192, 203, 0.3),  // pink
+      rgba(255, 223, 186, 0.3),  // peach
+      rgba(255, 255, 186, 0.3),  // light yellow
+      rgba(186, 255, 201, 0.3),  // light green
+      rgba(186, 225, 255, 0.3),  // light blue
+      rgba(223, 186, 255, 0.3)   // light purple
+    );
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 70%;
+
+    &:hover {
+      transform: translateX(5px);
+      background: linear-gradient(
+        45deg,
+        rgba(255, 192, 203, 0.5),
+        rgba(255, 223, 186, 0.5),
+        rgba(255, 255, 186, 0.5),
+        rgba(186, 255, 201, 0.5),
+        rgba(186, 225, 255, 0.5),
+        rgba(223, 186, 255, 0.5)
+      );
+    }
+
+    span {
+      font-size: 1.2em;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .number-input {
+      width: 70px;
+      padding: 8px;
+      border: 2px solid #3498db;
+      border-radius: 8px;
+      font-size: 1.1em;
+      text-align: center;
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #2980b9;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+      }
+    }
+
+    .feedback {
+      margin-left: 15px;
+      font-size: 1em;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .clear-button {
+      padding: 8px 15px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: #c0392b;
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

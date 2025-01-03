@@ -1,0 +1,116 @@
+.calculs-section {
+  padding: 25px;
+  background: linear-gradient(145deg, #f6f7f9, #ffffff);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+
+  h2 {
+    color: #d12c87;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .exercise-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+    width: 80%;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    span {
+      font-size: 24px;
+      font-weight: bold;
+      color: #4CAF50;
+      transition: all 0.3s ease;
+    }
+
+    &:hover span {
+      transform: scale(1.1);
+    }
+
+    &:nth-child(3) {
+      background: linear-gradient(to right, #ff6b6b20, #ff6b6b40);
+      span { color: #ff6b6b; }
+      .number-input { border-color: #ff6b6b; }
+      &:focus-within { box-shadow: 0 4px 12px #ff6b6b40; }
+    }
+
+    &:nth-child(4) {
+      background: linear-gradient(to right, #4ecdc420, #4ecdc440);
+      span { color: #4ecdc4; }
+      .number-input { border-color: #4ecdc4; }
+      &:focus-within { box-shadow: 0 4px 12px #4ecdc440; }
+    }
+
+    &:nth-child(5) {
+      background: linear-gradient(to right, #ffd93d20, #ffd93d40);
+      span { color: #ffd93d; }
+      .number-input { border-color: #ffd93d; }
+      &:focus-within { box-shadow: 0 4px 12px #ffd93d40; }
+    }
+
+    &:nth-child(6) {
+      background: linear-gradient(to right, #6c5ce720, #6c5ce740);
+      span { color: #6c5ce7; }
+      .number-input { border-color: #6c5ce7; }
+      &:focus-within { box-shadow: 0 4px 12px #6c5ce740; }
+    }
+
+    &:nth-child(7) {
+      background: linear-gradient(to right, #a8e6cf20, #a8e6cf40);
+      span { color: #3d8168; }
+      .number-input { border-color: #3d8168; }
+      &:focus-within { box-shadow: 0 4px 12px #a8e6cf40; }
+    }
+
+    .number-input {
+      width: 80px;
+      padding: 10px;
+      border: 2px solid #4CAF50;
+      border-radius: 8px;
+      font-size: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(76,175,80,0.3);
+        transform: scale(1.05);
+        background: rgba(255, 255, 255, 0.9);
+      }
+    }
+
+    .feedback {
+      margin-left: 15px;
+      font-weight: 500;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

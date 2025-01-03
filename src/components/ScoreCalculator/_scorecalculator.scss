@@ -1,0 +1,49 @@
+.score-container {
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.calculate-button {
+
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #FF69B4;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  margin-right: 10px;
+  font-size: 1.7rem;
+
+  &:hover {
+    transform: scale(1.05);
+    background-color: #FF1493;
+  }
+
+  &.disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}
+
+.score-display {
+  margin-top: 10px;
+  font-size: 1.1em;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  font-weight: bold;
+
+  .score-value {
+    font-weight: bold;
+    color: #FF69B4;
+  }
+
+  .score-message {
+    margin-top: 5px;
+  }
+}

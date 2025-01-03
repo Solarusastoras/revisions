@@ -1,0 +1,35 @@
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+    
+
+    .validate-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .validate-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 25px;
+      height: 50px;
+      font-size: 1.7rem;
+    }
+
+    .clear-all-button {
+      background-color: #dc3545;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      height: 50px;
+      font-size: 1.7rem;
+    }
+}

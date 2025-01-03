@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveCalculatedScore } from '../store/scoresSlice';
+import { saveCalculatedScore } from '../../store/scoresSlice';
 
 function Moyenne() {
     const dispatch = useDispatch();
