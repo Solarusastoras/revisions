@@ -15,18 +15,6 @@ function Moyenne() {
         savedScores: {}
     };
 
-    const calculateExerciseScore = (answers, correctAnswers) => {
-        if (!answers || Object.keys(answers).length === 0) return 0;
-        let correctCount = 0;
-        Object.keys(answers).forEach(key => {
-            const index = parseInt(key.split('_')[1]);
-            if (Number(answers[key]) === correctAnswers[index]) {
-                correctCount++;
-            }
-        });
-        return (correctCount / Object.keys(answers).length) * 20;
-    };
-
     const exercises = [
         {
             name: 'Double 🎯',

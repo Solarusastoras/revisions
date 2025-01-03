@@ -46,7 +46,7 @@ function ScoreCalculator({
     if (answersValidated) {
       calculateScore();
     }
-  }, [answersValidated, answers]);
+  }, [answersValidated, calculateScore]);
 
   if (!answersValidated) return null;
 
