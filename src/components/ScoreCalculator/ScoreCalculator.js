@@ -7,11 +7,11 @@ function ScoreCalculator({
   correctAnswers = [], 
   exerciseKey = '', 
   answersValidated = false,
-  compareFunction = (a, b) => a === b 
+  compareFunction = (a, b) => a === b,
+  answers = {} // Ajouter ce prop
 }) {
   const [score, setScore] = useState(null);
   const dispatch = useDispatch();
-  const answers = useSelector(state => state.scores[`${exerciseKey}Answers`]) || {};
   const savedScore = useSelector(state => state.scores.savedScores[exerciseKey]);
 
   useEffect(() => {

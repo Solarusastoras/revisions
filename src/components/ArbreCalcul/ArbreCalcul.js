@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ScoreCalculator from '../ScoreCalculator/ScoreCalculator';
-import useValiDelete from '../ValiDelete/ValiDelete';
 import ValiDelete from '../ValiDelete/ValiDelete';
 import './_arbre_calcul.scss';
 
@@ -37,17 +36,38 @@ function ArbreCalcul() {
 
   const correctAnswers = arbres.map(arbre => arbre.ligne3.resultat);
 
-  const {
-    handleAnswerChange,
-    clearExerciseResult,
-    validateAnswers,
-    handleClearAll
-  } = useValiDelete({
-    exerciseKey: 'arbreCalcul',
-    answers,
-    setShowFeedback,
-    setAnswersValidated
-  });
+  const handleAnswerChange = (e, key) => {
+    const newAnswers = { 
+      ...answers, 
+      [key]: e.target.value
+    };
+    setAnswers(newAnswers);
+  };
+
+  const validateAnswers = () => {
+    setAnswersValidated(true);
+    setShowFeedback(true);
+    
+    // Créer une copie des réponses existantes
+    const allAnswers = { ...answers };
+    
+    // Ajouter les réponses formatées pour le score sans écraser les existantes
+    arbres.forEach((_, index) => {
+      allAnswers[`answer_${index}`] = answers[`final_${index}`];
+    });
+    
+    // Sauvegarder toutes les réponses
+    localStorage.setItem('arbreCalculAnswers', JSON.stringify(allAnswers));
+    // Mettre à jour l'état en gardant toutes les réponses
+    setAnswers(allAnswers);
+  };
+
+  const handleClearAll = () => {
+    setAnswers({});
+    setShowFeedback(false);
+    setAnswersValidated(false);
+    localStorage.removeItem('arbreCalculAnswers');
+  };
 
   return (
     <section className="arbre-section">
@@ -57,10 +77,13 @@ function ArbreCalcul() {
         onClear={handleClearAll}
         scoreCalculator={
           <ScoreCalculator 
-            answers={answers} 
-            correctAnswers={correctAnswers} 
-            localStorageKey="arbreCalculAnswers"
-            setAnswers={setAnswers}
+            correctAnswers={correctAnswers}
+            exerciseKey="arbreCalcul"
+            answersValidated={answersValidated}
+            compareFunction={(userAnswer, correctAnswer) => 
+              Number(userAnswer) === Number(correctAnswer)
+            }
+            answers={answers} // Ajouter cette prop
           />
         }
       />
