@@ -1,18 +1,20 @@
 .trouve-chiffre-section {
   padding: 30px;
-  background-color: #4a3ea1;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #ffd1dc, #ffb6c1);
+  border-radius: 25px;
+  box-shadow: 0 8px 16px rgba(255, 182, 193, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+  border: 3px solid #fff;
 
   h2 {
-    color: #ffffff;
+    color: #ff69b4;
     margin-bottom: 30px;
     text-align: center;
     font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+    font-family: 'Comic Sans MS', cursive;
   }
 
   .exercise-row {
@@ -20,86 +22,88 @@
     align-items: center;
     gap: 15px;
     margin-bottom: 20px;
-    padding: 15px;
-    background: linear-gradient(
-      rgba(255, 192, 203, 0.618),  // pink
-      rgba(255, 223, 186, 0.3),  // peach
-      rgba(255, 255, 186, 0.3),  // light yellow
-      rgba(186, 255, 201, 0.3),  // light green
-      rgba(186, 225, 255, 0.3),  // light blue
-      rgba(223, 186, 255, 0.3)   // light purple
-    );
-    border-radius: 20px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 30px;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+    width: 85%;
+    border: 2px solid #ffc0cb;
 
     &:hover {
-      transform: translateX(5px);
-      background: linear-gradient(
-        45deg,
-        rgba(255, 192, 203, 0.5),
-        rgba(255, 223, 186, 0.5),
-        rgba(255, 255, 186, 0.5),
-        rgba(186, 255, 201, 0.5),
-        rgba(186, 225, 255, 0.5),
-        rgba(223, 186, 255, 0.5)
-      );
+      transform: translateY(-3px) scale(1.02);
+      background: rgba(255, 255, 255, 0.95);
+      border-color: #ff69b4;
     }
 
     span {
-      font-size: 1.5rem;
-      font-weight: 500;
-      color: #ffffff;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #ff69b4;
+      font-family: 'Comic Sans MS', cursive;
     }
 
     .number-input {
-      width: 70px;
-      padding: 8px;
-      border: 2px solid #3498db;
-      border-radius: 8px;
-      font-size: 1.5rem;
+      width: 80px;
+      padding: 10px;
+      border: 3px solid #ffb6c1;
+      border-radius: 15px;
+      font-size: 1.8rem;
       text-align: center;
       transition: all 0.3s ease;
+      background-color: #fff5f6;
+      color: #ff69b4;
 
       &:focus {
         outline: none;
-        border-color: #2980b9;
-        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        border-color: #ff69b4;
+        box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+        transform: scale(1.05);
       }
     }
 
     .feedback {
       margin-left: 15px;
-      font-size: 1.5rem;
-      animation: fadeIn 0.5s ease;
-    }
-
-    .clear-button {
-      padding: 8px 15px;
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.2s ease;
-
-      &:hover {
-        background-color: #c0392b;
-        transform: scale(1.05);
-      }
+      font-size: 1.6rem;
+      animation: bounceIn 0.6s ease;
     }
   }
 }
 
-@keyframes fadeIn {
-  from {
+@keyframes bounceIn {
+  0% {
     opacity: 0;
-    transform: translateX(-10px);
+    transform: scale(0.3);
   }
-  to {
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+  70% {
+    opacity: 0.9;
+    transform: scale(0.9);
+  }
+  100% {
     opacity: 1;
-    transform: translateX(0);
+    transform: scale(1);
   }
 }
+
+.validate-button, .clear-button {
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  font-family: 'Comic Sans MS', cursive;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+

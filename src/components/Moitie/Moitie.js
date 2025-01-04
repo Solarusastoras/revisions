@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveScore, clearScore, saveCalculatedScore } from '../../store/scoresSlice';
 import ScoreCalculator from '../ScoreCalculator/ScoreCalculator';
@@ -10,35 +10,19 @@ function Moitie() {
   const answers = useSelector(state => state.scores.moitieAnswers) || {};
   const [showFeedback, setShowFeedback] = useState(false);
   const [answersValidated, setAnswersValidated] = useState(false);
-  const [shuffledMoities, setShuffledMoities] = useState([]);
 
   const moities = [
-    { number: 2 },
-    { number: 4 },
-    { number: 6 },
-    { number: 8 },
     { number: 10 },
-    { number: 12 },
-    { number: 14 },
+    { number: 4 },
     { number: 16 },
+    { number: 2 },
+    { number: 14 },
+    { number: 6 },
+    { number: 20 },
+    { number: 8 },
     { number: 18 },
-    { number: 20 }
+    { number: 12 }
   ];
-
-  // Fonction pour mélanger le tableau
-  const shuffleArray = (array) => {
-    let shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  };
-
-  // Mélanger les questions au chargement
-  useEffect(() => {
-    setShuffledMoities(shuffleArray(moities));
-  }, []);
 
   const correctAnswers = moities.map(item => item.number / 2);
 
@@ -67,8 +51,6 @@ function Moitie() {
       exercise: 'moitie',
       score: null
     }));
-    // Mélanger à nouveau les questions
-    setShuffledMoities(shuffleArray(moities));
   };
 
   return (
@@ -79,13 +61,13 @@ function Moitie() {
         onClear={handleClearAll}
         scoreCalculator={
           <ScoreCalculator 
-            correctAnswers={shuffledMoities.map(item => item.number / 2)}
+            correctAnswers={moities.map(item => item.number / 2)}
             exerciseKey="moitie"
             answersValidated={answersValidated}
           />
         }
       />
-      {shuffledMoities.map((item, index) => (
+      {moities.map((item, index) => (
         <div key={index} className="exercise-row">
           <span>Moitié de {item.number}</span>
           <span>c'est</span>

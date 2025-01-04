@@ -32,11 +32,6 @@ function Moyenne() {
             correctAnswers: ['un', 'deux', 'trois']
         },
         {
-            name: 'Trouve le chiffre 🔍',
-            key: 'trouveChiffreAnswers',
-            correctAnswers: [5, 6, 11, 6, 18, 3, 10, 24, 9, 38, 8, 4]
-        },
-        {
             name: 'Calcul en ligne ! 🧮',
             key: 'calculsAnswers',
             correctAnswers: [9, 6, 18, 10, 20]
@@ -45,7 +40,12 @@ function Moyenne() {
             name: 'Arbre à calcul 🌳',
             key: 'arbreCalculAnswers',
             correctAnswers: [18, 26, 19, 19]
-        }
+        },
+        {
+            name: 'Trouve le chiffre 🔍',
+            key: 'trouveChiffreAnswers',
+            correctAnswers: [5, 6, 11, 6, 18, 3, 10, 24, 9, 38, 8, 4]
+        },
     ];
 
     const getExerciseScore = (exercise) => {

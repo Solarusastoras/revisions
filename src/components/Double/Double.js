@@ -10,35 +10,19 @@ function Double() {
   const answers = useSelector(state => state.scores.doubleAnswers) || {};
   const [showFeedback, setShowFeedback] = useState(false);
   const [answersValidated, setAnswersValidated] = useState(false);
-  const [shuffledDoubles, setShuffledDoubles] = useState([]);
 
   const doubles = [
-    { number: 1 },
-    { number: 2 },
-    { number: 3 },
-    { number: 4 },
     { number: 5 },
-    { number: 6 },
-    { number: 7 },
+    { number: 2 },
     { number: 8 },
+    { number: 1 },
+    { number: 7 },
+    { number: 3 },
+    { number: 10 },
+    { number: 4 },
     { number: 9 },
-    { number: 10 }
+    { number: 6 }
   ];
-
-  // Fonction pour mélanger un tableau
-  const shuffleArray = (array) => {
-    let shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  };
-
-  // Mélanger les questions au chargement et quand on clique sur "Tout effacer"
-  useEffect(() => {
-    setShuffledDoubles(shuffleArray(doubles));
-  }, []);
 
   const handleAnswerChange = (index, value) => {
     setAnswersValidated(false);
@@ -74,8 +58,6 @@ function Double() {
       exercise: 'double',
       score: null
     }));
-    // Mélanger à nouveau les questions
-    setShuffledDoubles(shuffleArray(doubles));
   };
 
   const getFeedbackMessage = (isCorrect) => {
@@ -100,13 +82,13 @@ function Double() {
         onClear={handleClearAll}
         scoreCalculator={
           <ScoreCalculator 
-            correctAnswers={shuffledDoubles.map(item => item.number * 2)}
+            correctAnswers={doubles.map(item => item.number * 2)}
             exerciseKey="double"
             answersValidated={answersValidated}
           />
         }
       />
-      {shuffledDoubles.map((item, index) => (
+      {doubles.map((item, index) => (
         <div key={index} className="exercise-row">
           <span>Double de {item.number}</span>
           <span>c'est</span>

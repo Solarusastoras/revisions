@@ -1,31 +1,37 @@
 import React from 'react';
 import './_validelete.scss';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 const useValiDelete = ({ 
   exerciseKey, 
   answers, 
-  setAnswers,  // Add setAnswers to parameters
+  setAnswers,
   setShowFeedback, 
   setAnswersValidated 
 }) => {
-  // ...existing code...
-
   const handleAnswerChange = useCallback((e, index) => {
     const value = e.target.value;
-    const newAnswers = {
-      ...answers,
-      [`answer_${index}`]: value
-    };
-    
-    localStorage.setItem(`${exerciseKey}Answers`, JSON.stringify(newAnswers));
-    setAnswers(newAnswers);
+    setAnswers(prevAnswers => {
+      const newAnswers = {
+        ...prevAnswers,
+        [`answer_${index}`]: value
+      };
+      localStorage.setItem(`${exerciseKey}Answers`, JSON.stringify(newAnswers));
+      return newAnswers;
+    });
     setShowFeedback(true);
-  }, [answers, exerciseKey, setAnswers, setShowFeedback]);
+  }, [exerciseKey, setAnswers, setShowFeedback]);
+
+  const handleClear = useCallback(() => {
+    setAnswers({});
+    localStorage.removeItem(`${exerciseKey}Answers`);
+    setShowFeedback(false);
+    setAnswersValidated(false);
+  }, [exerciseKey, setAnswers, setShowFeedback, setAnswersValidated]);
 
   return {
     handleAnswerChange,
-    // ...existing code...
+    handleClear,
   };
 };
 
