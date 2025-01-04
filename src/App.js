@@ -11,7 +11,7 @@ import TrouveChiffre from './components/TrouveChiffre/TrouveChiffre';
 import Moyenne from './components/Moyenne/Moyenne';
 
 function App() {
-  const [currentExercise, setCurrentExercise] = useState('double');
+  const [currentExercise, setCurrentExercise] = useState('moyenne'); // Changed from 'double' to 'moyenne'
 
   const handleExerciseChange = (event, exercise) => {
     event.preventDefault();
@@ -35,58 +35,61 @@ function App() {
       case 'trouve':
         return <TrouveChiffre />;
       default:
-        return <Double />;
+        return <Moyenne />; // Changed from <Double /> to <Moyenne />
     }
   };
 
   return (
     <Provider store={store}>
       <div className="App">
-        <h1>Les Maths CP de Nono 🌟</h1>
+        <h1>✨ Le Paradis des Maths de Nono 🎀</h1>
         
         <div className="exercise-buttons">
           <button 
-            className={currentExercise === 'moyenne' ? 'active' : ''} 
+            className={`bulletin-button ${currentExercise === 'moyenne' ? 'active' : ''}`}
             onClick={(event) => handleExerciseChange(event, 'moyenne')}
           >
-           Bulletin de note 
+            Bulletin de note 📝
           </button>
-          <button 
-            className={currentExercise === 'double' ? 'active' : ''} 
-            onClick={(event) => handleExerciseChange(event, 'double')}
-          >
-            Double 🎯
-          </button>
-          <button 
-            className={currentExercise === 'moitie' ? 'active' : ''} 
-            onClick={(event) => handleExerciseChange(event, 'moitie')}
-          >
-            Moitié 📏
-          </button>
-          <button 
-            className={currentExercise === 'ecris' ? 'active' : ''} 
-            onClick={(event) => handleExerciseChange(event, 'ecris')}
-          >
-            Écris ✏️
-          </button>
-          <button 
-            className={currentExercise === 'calculs' ? 'active' : ''} 
-            onClick={(event) => handleExerciseChange(event, 'calculs')}
-          >
-            C'est Calcul ! 🧮
-          </button>
-          <button 
-            className={currentExercise === 'arbre' ? 'active' : ''} 
-            onClick={(event) => handleExerciseChange(event, 'arbre')}
-          >
-            Arbre à calcul 🌳
-          </button>
-          <button 
-            className={currentExercise === 'trouve' ? 'active' : ''} 
-            onClick={(event) => handleExerciseChange(event, 'trouve')}
-          >
-            Trouve le chiffre 🔍
-          </button>
+          
+          <div className="other-exercises">
+            <button 
+              className={`exercise-button ${currentExercise === 'double' ? 'active' : ''}`}
+              onClick={(event) => handleExerciseChange(event, 'double')}
+            >
+              Double 🦄
+            </button>
+            <button 
+              className={`exercise-button ${currentExercise === 'moitie' ? 'active' : ''}`}
+              onClick={(event) => handleExerciseChange(event, 'moitie')}
+            >
+              Moitié 🎀
+            </button>
+            <button 
+              className={`exercise-button ${currentExercise === 'ecris' ? 'active' : ''}`}
+              onClick={(event) => handleExerciseChange(event, 'ecris')}
+            >
+              Écris 🌸
+            </button>
+            <button 
+              className={`exercise-button ${currentExercise === 'calculs' ? 'active' : ''}`}
+              onClick={(event) => handleExerciseChange(event, 'calculs')}
+            >
+              Calculs Magiques ✨
+            </button>
+            <button 
+              className={`exercise-button ${currentExercise === 'arbre' ? 'active' : ''}`}
+              onClick={(event) => handleExerciseChange(event, 'arbre')}
+            >
+              Arbre Enchanté 🌺
+            </button>
+            <button 
+              className={`exercise-button ${currentExercise === 'trouve' ? 'active' : ''}`}
+              onClick={(event) => handleExerciseChange(event, 'trouve')}
+            >
+              Chasse aux Chiffres 🌈
+            </button>
+          </div>
         </div>
 
         {renderExercise()}
