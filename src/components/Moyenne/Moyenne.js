@@ -63,12 +63,12 @@ function Moyenne() {
     };
 
     const getAppreciation = (score) => {
-        if (!score) return "";  // Retourne une chaîne vide si score est 0
-        if (score >= 16) return "Excellent! 🌟";
-        if (score >= 14) return "Très bien! ⭐";
-        if (score >= 12) return "Bien! 👍";
-        if (score >= 10) return "Assez bien 👌";
-        return "Continue tes efforts! 💪";
+        if (!score) return "";
+        if (score >= 16) return "Excellent!\n🌟";
+        if (score >= 14) return "Très bien!\n⭐";
+        if (score >= 12) return "Bien!\n👍";
+        if (score >= 10) return "Assez bien\n👌";
+        return "Continue\ntes efforts!\n💪";
     };
 
     const averageScore = exercises
@@ -84,7 +84,7 @@ function Moyenne() {
                     <tr>
                         <th>Exercice</th>
                         <th>Note /20</th>
-                        <th>Appréciation</th>
+                        <th className='cache_appreciation'>Appréciation</th>
                     </tr>
                 </thead>
                 <tbody>

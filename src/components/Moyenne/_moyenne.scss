@@ -1,6 +1,6 @@
 .bulletin-container {
   padding: 2rem;
-  background-color: #fff9fc;
+  background-color: #efb0d0;
   border-radius: 20px;
   box-shadow: 0 4px 15px rgba(255, 182, 193, 0.2);
   max-width: 1200px;
@@ -33,6 +33,9 @@
 
       &:first-child { border-radius: 12px 0 0 12px; }
       &:last-child { border-radius: 0 12px 12px 0; }
+      &:nth-child(2) {
+        text-align: center;  // Centrer l'en-tête "Note /20"
+      }
     }
 
     td {
@@ -44,24 +47,35 @@
         border-radius: 12px 0 0 12px;
         color: #ff69b4;
         font-weight: 500;
+        text-align: left;
+        padding-left: 2rem;
       }
-      &:last-child { border-radius: 0 12px 12px 0; }
-
-      input {
-        width: 70px;
-        padding: 0.5rem;
+      &:last-child { 
+        border-radius: 0 12px 12px 0;
+        white-space: pre-line;
         text-align: center;
-        border: 2px solid #ffb6c1;
-        border-radius: 12px;
-        font-size: 1em;
-        background-color: #fff;
-        color: #ff69b4;
-        transition: all 0.3s ease;
+        width: 120px;
+      }
+      &:nth-child(2) {
+        text-align: center;  // Centrer la cellule contenant l'input
+        
+        input {
+          width: 70px;
+          padding: 0.5rem;
+          text-align: center;
+          border: 2px solid #ffb6c1;
+          border-radius: 12px;
+          font-size: 1em;
+          background-color: #fff;
+          color: #ff69b4;
+          transition: all 0.3s ease;
+          margin: 0 auto;  // Centrer l'input dans sa cellule
 
-        &:focus {
-          outline: none;
-          border-color: #ff69b4;
-          box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
+          &:focus {
+            outline: none;
+            border-color: #ff69b4;
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.2);
+          }
         }
       }
     }
@@ -107,5 +121,62 @@
       font-weight: 500;
       font-family: 'Comic Sans MS', cursive;
     }
+    
+    .cache_appreciation {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .bulletin-container {
+    table {
+      td:last-child {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        
+        // Pour les emojis
+        span, img {
+          display: block;
+          margin-top: 5px;
+        }
+      }
+      
+      tr {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+      }
+      
+      td {
+        &:first-child {
+          width: 100%;
+          border-radius: 12px 12px 0 0;
+        }
+        
+        &:nth-child(2) {
+          border-radius: 0 0 0 12px;
+          width: 100%;
+          text-align: center;
+          
+          input {
+            margin: 0 auto;
+          }
+        }
+        
+        &:last-child {
+          border-radius: 0 0 12px 12px;
+          width: 100%;
+          padding-top: 8px;
+          text-align: center;
+        }
+      }
+    }
+  }
+  
+  .cache_appreciation {
+    display: none;
   }
 }
