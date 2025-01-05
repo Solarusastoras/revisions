@@ -85,8 +85,8 @@ function TrouveChiffre() {
           {showFeedback && answers[`answer_${index}`] && (
             <span className="feedback">
               {Number(answers[`answer_${index}`]) === (exercice.result - exercice.num1)
-                ? '✅ Bravo Nono ! Tu as trouvé le bon chiffre ! 🌟' 
-                : '❌ Essaie encore Nono ! Tu peux y arriver ! 💪'}
+                ? '✅ Bravo Nono ! 🌟' 
+                : '❌ Tu peux y arriver !'}
             </span>
           )}
         </div>

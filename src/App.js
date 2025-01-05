@@ -42,7 +42,7 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <h1>✨ Le Paradis des Maths de Nono 🎀</h1>
+        <h1>Les Maths CP <br/> de Nono</h1>
         
         <div className="exercise-buttons">
           <button 

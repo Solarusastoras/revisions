@@ -114,3 +114,38 @@
     transform: translateX(0);
   }
 }
+
+@media (max-width: 768px) {
+  .calculs-section {
+    padding: 10px;
+    width: 95%;
+
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    .exercise-row {
+      width: 100%;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px;
+
+      span {
+        width: 100%;
+        text-align: center;
+        font-size: 1rem;
+      }
+
+      .number-input {
+        font-size: 1rem;
+      }
+
+      .feedback {
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}

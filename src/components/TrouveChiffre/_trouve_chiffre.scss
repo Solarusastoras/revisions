@@ -27,7 +27,7 @@
     border-radius: 30px;
     transition: all 0.4s ease;
     box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
-    width: 85%;
+    width: 75%;
     border: 2px solid #ffc0cb;
 
     &:hover {
@@ -63,7 +63,7 @@
     }
 
     .feedback {
-      margin-left: 15px;
+      margin: 0;
       font-size: 1.6rem;
       animation: bounceIn 0.6s ease;
     }
@@ -103,6 +103,61 @@
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@media (max-width: 768px) {
+
+  .trouve-chiffre-section {
+    width:89%;
+    margin-top:50px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+      font-size: 1.2rem;
+    }
+
+    .exercise-row {
+      width:80%;
+      height: 80%;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin: 10px auto;
+
+      span {
+        font-size: 1.2rem;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .number-input {
+        width: 80px;
+        font-size: 1.2rem;
+        margin: 10px auto;
+        display: block;
+      }
+
+      .feedback {
+        font-size: 0.9rem;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    
+    .feedback {
+      font-size: 1.2rem;
+      padding: 0;
+      margin: 0px;
+      animation: bounceIn 0.6s ease;
+    }
   }
 }
 

@@ -116,3 +116,25 @@
     transform: translateY(0);
   }
 }
+
+@media (max-width: 768px) {
+  .ecris-section {
+    padding: 10px;
+    
+    .exercise-row {
+      width: 100%;
+      flex-direction: column;
+      gap: 10px;
+      
+      input {
+        width: 90% !important;
+        font-size: 1.4rem;
+      }
+      
+      span {
+        font-size: 1.4rem;
+        text-align: center;
+      }
+    }
+  }
+}

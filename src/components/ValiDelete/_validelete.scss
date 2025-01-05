@@ -94,14 +94,30 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 720px) {
   .validelete-container {
+    width: 80%;
+   
+    
+    }
     .buttons-section {
       flex-direction: column;
+      margin-top: -50px;
+      
+     
       
       button {
-        width: 100%;
+    
+        width: 85%;
+        height: 90px;
       }
     }
+
+  .validate-button, .clear-button {
+    width: 90%;
+    font-size: 1rem;
+    padding: 8px 15px;
+    margin: 5px auto;
+    display: block;
   }
 }
