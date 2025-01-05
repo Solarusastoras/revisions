@@ -8,7 +8,7 @@ const scoresSlice = createSlice({
     calculsAnswers: {},
     arbreCalculAnswers: {},
     trouveChiffreAnswers: {},
-    savedScores: {} // Nouveau: pour stocker les scores calculés
+    savedScores: {} 
   },
   reducers: {
     saveScore: (state, action) => {
