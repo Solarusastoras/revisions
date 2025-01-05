@@ -48,6 +48,8 @@
 @media (max-width: 768px) {
   .score-container {
     padding: 10px;
+    margin-bottom: 80px;
+    
     
     table {
       font-size: 0.9rem;
@@ -125,20 +127,24 @@
             
             &[data-label="Note"] {
               position: relative;
-              padding-bottom: 25px; // Espace pour l'appréciation
+              padding-bottom: 40px; // Espace pour l'appréciation
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              
               
               &::after {
                 content: attr(data-appreciation);
                 position: absolute;
-                bottom: 5px;
+                bottom: 10px;
                 left: 50%;
                 transform: translateX(-50%);
-                font-size: 0.8rem;
+                font-size: 0.9rem;
                 color: #ff69b4;
                 font-style: italic;
-                white-space: nowrap;
                 width: 100%;
                 text-align: center;
+                margin-bottom: 30px;
               }
             }
 

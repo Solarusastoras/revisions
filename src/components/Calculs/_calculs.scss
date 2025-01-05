@@ -125,19 +125,20 @@
     }
 
     .exercise-row {
-      width: 100%;
+      width: 80%;
       flex-wrap: wrap;
       gap: 8px;
       padding: 8px;
+      
 
       span {
         width: 100%;
         text-align: center;
-        font-size: 1rem;
+        font-size: 1.5rem;
       }
 
       .number-input {
-        font-size: 1rem;
+        font-size: 1.5rem;
       }
 
       .feedback {

@@ -125,8 +125,9 @@
   font-size: 18px;
   font-weight: bold;
   animation: fadeIn 0.5s ease;
-  background: linear-gradient(to right, #FFF0F5, #FFE4E1);
+  background: #da6faf;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  color: #fafafa;
 }
 
 @keyframes fadeIn {
@@ -159,7 +160,6 @@ h2 {
 }
 
 .arbre-section {
-  // ...existing styles...
 
   .controls {
     display: flex;
@@ -169,7 +169,7 @@ h2 {
     margin-bottom: 30px;
 
     .score-container {
-      background-color: #fff0f5;
+      background-color: #d561a2;
       padding: 15px 30px;
       border-radius: 15px;
       border: 2px solid #ffb6c1;
@@ -179,14 +179,14 @@ h2 {
 
       .score {
         font-size: 1.2em;
-        color: #ff69b4;
+        color: #fafafa;
         font-weight: bold;
         margin-bottom: 10px;
       }
 
       .appreciation {
         font-family: 'Comic Sans MS', cursive;
-        color: #ff69b4;
+        color: #ffffff;
         font-size: 1.1em;
         animation: bounce 0.5s;
       }
@@ -231,7 +231,7 @@ h2 {
 @media (max-width: 768px) {
   .arbre-container {
     padding: 10px;
-    width: 95%;
+    width: 90%;
   }
 
   .tree-exercise {
@@ -280,5 +280,64 @@ h2 {
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+  }
+
+  .arbre-section {
+    .controls {
+      width: 100%;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .score-container {
+        width: 90%;
+        max-width: 300px;
+        margin: 10px auto;
+        padding: 15px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .score {
+          font-size: 1.1rem;
+          margin-bottom: 8px;
+        }
+
+        .appreciation {
+          font-size: 1rem;
+          text-align: center;
+        }
+      }
+
+      .buttons-container {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        gap: 10px;
+        width: 90%;
+        max-width: 300px;
+        margin: 0 auto;
+
+        button {
+          width: 80%;
+          padding: 12px;
+          font-size: 1rem;
+          margin: 5px 0;
+
+          &.validate-btn {
+            margin-bottom: 10px;
+          }
+
+          &.clear-btn {
+            margin-top: 5px;
+          }
+        }
+      }
+
+      .score-container {
+        width: 60%;
+      }
+    }
   }
 }

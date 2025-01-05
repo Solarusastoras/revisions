@@ -63,15 +63,12 @@ function Double() {
   const getFeedbackMessage = (isCorrect) => {
     if (isCorrect) {
         const messages = [
-            "✅ Bravo Nono ! Tu es super forte ! 🌟",
-            "✨ Waouh ! C'est parfait ! 🎀",
-            "🌈 Incroyable ! Tu as tout bon ! 💖",
-            "🎯 Excellent travail ! Tu brilles ! ⭐",
-            "🦄 Magnifique ! Continue comme ça ! 🌸"
+            "🌈 Tu es super forte ! 🦄",
+          
         ];
         return messages[Math.floor(Math.random() * messages.length)];
     }
-    return "❌ Essaie encore !";
+    return "❌ Te décourage pas ! ❌";
   };
 
   return (
